@@ -11,12 +11,13 @@ ARG NPM_REPO_NAME
 ARG REGISTRY
 MAINTAINER Elad Hirsch
 
-# Download artifacts from Artifactory
-RUN curl $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar
-RUN curl $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz
+RUN echo $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar
 
-#Extract vue app
-RUN tar -xzf client.tgz && rm client.tgz
+# Download artifacts from Artifactory
+RUN curl $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar \
+    && curl $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz \
+    && tar -xzf client.tgz \
+    && rm client.tgz
 
 # Set JAVA OPTS + Static file location
 ENV STATIC_FILE_LOCATION="/app/package/target/dist/"
