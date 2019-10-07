@@ -16,8 +16,8 @@ MAINTAINER Elad Hirsch
 RUN echo $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz
 
 # Download artifacts from Artifactory
-RUN curl -u $REGISTRY_USERNAME:$REGISTRY_PASSWORD $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar \
-    && curl $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz \
+RUN curl -f -u $REGISTRY_USERNAME:$REGISTRY_PASSWORD $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar \
+    && curl -f -u $REGISTRY_USERNAME:$REGISTRY_PASSWORD $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz \
     && tar -xzf client.tgz \
     && rm client.tgz
 
