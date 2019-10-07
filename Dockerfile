@@ -6,12 +6,14 @@ FROM openjdk:11-jdk
 WORKDIR /app
 
 #Define ARG Again -ARG variables declared before the first FROM need to be declered again
+ARG MAVEN_REPO_NAME
+ARG NPM_REPO_NAME
 ARG REGISTRY
 MAINTAINER Elad Hirsch
 
 # Download artifacts from Artifactory
-RUN curl $REGISTRY/libs-release-local/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar
-RUN curl $REGISTRY/npm-libs-local/frontend/-/frontend-3.0.0.tgz --output client.tgz
+RUN curl $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar
+RUN curl $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz
 
 #Extract vue app
 RUN tar -xzf client.tgz && rm client.tgz
