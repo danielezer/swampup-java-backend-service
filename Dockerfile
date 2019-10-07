@@ -11,7 +11,7 @@ ARG NPM_REPO_NAME
 ARG REGISTRY
 MAINTAINER Elad Hirsch
 
-RUN echo $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar
+RUN echo $REGISTRY/$NPM_REPO_NAME/frontend/-/frontend-3.0.0.tgz --output client.tgz
 
 # Download artifacts from Artifactory
 RUN curl $REGISTRY/$MAVEN_REPO_NAME/com/jfrog/backend/1.0.0/backend-1.0.0.jar --output server.jar \
